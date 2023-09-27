@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Print the directory structure
+     # Print the directory structure
       - name: List directory structure
         run: |
-          pwd
-          ls -al
+          echo %cd%
+          dir
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
