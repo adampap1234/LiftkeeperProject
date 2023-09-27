@@ -18,12 +18,9 @@ jobs:
         with:
           node-version: '18.x'
       
-      # Navigate to the React project directory
-      - name: Change directory
-        run: cd liftkeeperproject
-
       - name: npm install, build, and test
         run: |
+          cd liftkeeperproject
           npm install
           npm run build --if-present
           npm run test --if-present
