@@ -13,33 +13,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-     # Print the directory structure
-      - name: List directory structure
-        run: |
-          echo %cd%
-          dir
-
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
+      
+      # Navigate to the React project directory
+      - name: Change directory
+        run: cd liftkeeperproject
 
       - name: npm install, build, and test
         run: |
-          # If package.json is in a sub-directory, adjust the path below.
-          # If it's in the root, this cd command is not necessary.
-          # cd path-to-directory-containing-package-json
-          
           npm install
           npm run build --if-present
           npm run test --if-present
-
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          # Adjust path if your build artifacts are inside a directory.
-          path: .
+          path: liftkeeperproject/build  # Assuming your build artifacts are in the 'build' directory
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,8 +46,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
-          # Adjust this path if you need to download artifacts to a specific directory.
-          path: .
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
