@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: liftkeeperproject/build  # Assuming your build artifacts are in the 'build' directory
+          path: liftkeeperproject/dist
 
   deploy:
     runs-on: ubuntu-latest
