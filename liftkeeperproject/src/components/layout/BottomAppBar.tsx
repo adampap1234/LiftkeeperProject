@@ -19,7 +19,9 @@ const BottomAppBar = () => {
   const questionsAndAnswers = [
     { question: "Hol tároljam az adatokat?", answer: "Mivel a feladat megkövetelte hogy az adatokat perzisztálni kell és React-es technológiát kell alkalmazni, így a redux mellett döntöttem." },
     { question: "Készítsek-e egy SPA-t, annak érdekében hogy a kliens oldali logika egyszerűbb, átláthatóbb legyen", answer: "Bár sok esetben egyszerűbb lett volna, kihívásként fogtam fel, hogy minden kalkuláció, data manaipulation a kliens oldalon marad." },
-    { question: "Mi alapján számoltam ki a nyeremény visszaosztását?", answer: "Az összes játékos jegyvásárlásából származó bevételből visszatartok 10%-ot, a fenmaradó összeget osztom vissza találat arányosan (10,20,30,40%) kettes találat felett." }
+    { question: "Mi alapján számoltam ki a nyeremény visszaosztását?", answer: "Az összes játékos jegyvásárlásából származó bevételből visszatartok 10%-ot, a fenmaradó összeget osztom vissza találat arányosan (10,20,30,40%) kettes találat felett." },
+    { question: "Hova töltsem fel a projectet és hol hostoljam?", answer: "Github-on található: https://github.com/adampap1234/LiftkeeperProject / Azure-ben került hostolásra egy subdomainen" }
+
   ];
 
   return (

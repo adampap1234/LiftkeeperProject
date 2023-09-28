@@ -58,7 +58,7 @@ const LotteryDraw = () => {
 
                 totalPayout += potentialWinnings;
 
-                if (ticket.owner === UserRole.PLAYER) {
+                if (ticket.owner === UserRole.PLAYER) { 
                     dispatch(updateBalance(potentialWinnings));
                     dispatch(updateAdminBalance(-potentialWinnings));
                 }
