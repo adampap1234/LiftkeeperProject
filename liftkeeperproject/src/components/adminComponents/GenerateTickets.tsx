@@ -30,7 +30,17 @@ function GenerateTickets() {
         };
     };
 
+    const handleTicketCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseInt(e.target.value, 10);
+        if (value <= 100) {
+            setTicketCount(value);
+        }
+    };
+
     const handleGenerateTickets = () => {
+        if (ticketCount > 100) {
+            return;
+        }
         const tickets: Ticket[] = Array.from({ length: ticketCount }, generateTicket);
         const totalCost = ticketCount * TICKET_COST;
 
@@ -47,7 +57,7 @@ function GenerateTickets() {
                     <TextField
                         label="Number of Tickets"
                         value={ticketCount}
-                        onChange={(e) => setTicketCount(parseInt(e.target.value, 10))}
+                        onChange={handleTicketCountChange}
                         type="number"
                     />
                 </Grid>
