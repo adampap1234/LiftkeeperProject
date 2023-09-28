@@ -1,13 +1,14 @@
-import { useSelector } from '../redux/store';
-import { Typography, Button, Avatar } from '@mui/material';
-import { blue, grey } from '@mui/material/colors';
+import { useSelector } from '../../redux/store';
+import { Typography, Button, Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { UserRole } from '../../utils/enums';
+import LotteryBall from './LotteryBall';
 
 function PurchasedTickets() {
     const isAdminMode = useSelector((state) => state.player.isAdminMode);
     const ticketStore = useSelector((state) => state.ticket);
-    const filteredTickets = isAdminMode ? ticketStore.tickets : ticketStore.tickets.filter(ticket => ticket.owner === 'player');
+    const filteredTickets = isAdminMode ? ticketStore.tickets : ticketStore.tickets.filter(ticket => ticket.owner === UserRole.PLAYER);
 
     const rows = filteredTickets.map((ticket, idx) => ({
         id: idx,
@@ -16,7 +17,6 @@ function PurchasedTickets() {
         earnings: ticket.earnings,
         used: ticket.used,
         owner: ticket.owner
-
     }));
 
     const columns = [
@@ -32,17 +32,7 @@ function PurchasedTickets() {
                                 key={number}
                                 style={{ width: '40px', height: '40px' }}
                             >
-                                <Avatar
-                                    sx={{
-                                        width: '40px',
-                                        height: '40px',
-                                        backgroundColor: params.row.matched.includes(number) ? blue[500] : grey[500],
-                                        color: 'white',
-                                        fontSize: '1rem',
-                                    }}
-                                >
-                                    {number}
-                                </Avatar>
+                                <LotteryBall number={number} isSelected={params.row.matched.includes(number)} />
                             </Button>
                         ))}
                     </>
@@ -83,20 +73,25 @@ function PurchasedTickets() {
         },
     ];
 
-    const sortedRows = isAdminMode ? rows.sort((a, b) => (a.owner === 'player' && b.owner === 'admin') ? -1 : 1) : rows;
+    const sortedRows = isAdminMode ? rows.sort((a, b) => (a.owner === UserRole.PLAYER && b.owner === UserRole.ADMIN) ? -1 : 1) : rows;
     const totalEarnings = filteredTickets.reduce((acc, ticket) => acc + ticket.earnings, 0);
 
     return (
-        <div style={{ height: 'auto', width: '100%' }}>
-            <Typography variant="h6" gutterBottom>Your Purchased Tickets:</Typography>
+        <Box style={{ height: 'auto', minWidth: '800px', padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '10px' }}>
+            <Typography variant="h5" gutterBottom style={{ marginBottom: '20px', fontWeight: 'bold', color: '#333' }}>
+                Your Purchased Tickets:
+            </Typography>
             <DataGrid
                 rows={sortedRows}
                 columns={columns}
                 disableRowSelectionOnClick
                 autoHeight
+                style={{ marginBottom: '20px', backgroundColor: '#fff', borderRadius: '10px' }}
             />
-            <Typography variant="h6" gutterBottom>Total Earnings: {totalEarnings} akcse</Typography>
-        </div>
+            <Typography variant="h6" style={{ fontWeight: '500', color: '#333' }}>
+                Total Earnings: <span style={{ color: '#ff5722', fontWeight: 'bold' }}>{totalEarnings} akcse</span>
+            </Typography>
+        </Box>
     );
 }
 

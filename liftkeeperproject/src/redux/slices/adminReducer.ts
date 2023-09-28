@@ -1,4 +1,4 @@
-import { AnyAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AdminState {
     balance: number;
@@ -8,11 +8,19 @@ const initialState: AdminState = {
     balance: 0,
 };
 
-export const adminReducer = (state = initialState, action: AnyAction) => {
-    switch (action.type) {
-        case 'UPDATE_OPERATOR_BALANCE':
-            return { ...state, balance: action.payload };
-        default:
-            return state;
-    }
-};
+const adminSlice = createSlice({
+    name: 'admin',
+    initialState,
+    reducers: {
+        updateAdminBalance: (state, action: PayloadAction<number>) => {
+            state.balance += action.payload;
+        },
+        resetAdminBalance: (state) => {
+            state.balance = initialState.balance;
+        }
+    },
+});
+
+export const { updateAdminBalance, resetAdminBalance } = adminSlice.actions;
+
+export default adminSlice.reducer;

@@ -3,8 +3,8 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 // slices
 import playerReducer from './slices/playerReducer';
-import { adminReducer } from './slices/adminReducer';
 import ticketReducer from './slices/ticketReducer';
+import adminReducer from './slices/adminReducer';
 // ----------------------------------------------------------------------
 
 export const rootPersistConfig = {

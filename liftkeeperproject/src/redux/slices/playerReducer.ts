@@ -26,10 +26,13 @@ const playerSlice = createSlice({
 
         updateIsAdminMode: (state, action: PayloadAction<boolean>) => {
             state.isAdminMode = action.payload;
+        },
+        resetPlayerBalance: (state) => {
+            state.balance = initialState.balance;
         }
     },
 });
 
-export const { setName, updateBalance,  updateIsAdminMode} = playerSlice.actions;
+export const { setName, updateBalance, updateIsAdminMode, resetPlayerBalance } = playerSlice.actions;
 
 export default playerSlice.reducer;
